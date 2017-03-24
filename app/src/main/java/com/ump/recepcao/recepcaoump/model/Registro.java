@@ -7,14 +7,14 @@ package com.ump.recepcao.recepcaoump.model;
 public class Registro {
 
     private String nomeVisitante;
-    private int telefone;
+    private Long telefone;
     private int idade;
     private String observacao;
 
     public Registro() {
     }
 
-    public Registro(String nomeVisitante, int telefone, int idade, String observacao) {
+    public Registro(String nomeVisitante, Long telefone, int idade, String observacao) {
         this.nomeVisitante = nomeVisitante;
         this.telefone = telefone;
         this.idade = idade;
@@ -29,11 +29,11 @@ public class Registro {
         this.nomeVisitante = nomeVisitante;
     }
 
-    public int getTelefone() {
+    public Long getTelefone() {
         return telefone;
     }
 
-    public void setTelefone(int telefone) {
+    public void setTelefone(Long telefone) {
         this.telefone = telefone;
     }
 
@@ -51,5 +51,16 @@ public class Registro {
 
     public void setObservacao(String observacao) {
         this.observacao = observacao;
+    }
+
+    @Override
+    public String toString() {
+
+        String texto = "Nome: "+nomeVisitante+ System.lineSeparator()+
+                "Telefone: "+telefone+System.lineSeparator()+
+                "Idadae: "+idade+System.lineSeparator()+
+                "Observação: "+observacao+System.lineSeparator();
+        return texto;
+
     }
 }

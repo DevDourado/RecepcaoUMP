@@ -3,13 +3,17 @@ package com.ump.recepcao.recepcaoump;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -49,47 +53,31 @@ public class RegistroActivity extends Activity {
             public void onClick(View v) {
 
                 String nome = nomeVisitante.getText().toString();
-                Integer tel = Integer.parseInt(telefone.getText().toString());
-                Integer ida = Integer.parseInt(idade.getText().toString());
+                Long tel = Long.parseLong(telefone.getText().toString());
+
                 String obs = observacao.getText().toString();
 
-                Registro registro = new Registro();
+                final Registro registro = new Registro(nome,tel,18,obs);
 
                 /**/
-
-                registro.setNomeVisitante(nome);
-                registro.setTelefone(tel);
-                registro.setIdade(ida);
-                registro.setObservacao(obs);
-
+                ref.setValue(registro).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(!task.isSuccessful()){
+                            Toast.makeText(RegistroActivity.this, "Erro ao enviar dados, tente novamente mais tarde", Toast.LENGTH_SHORT).show();
+                        }else{
+                            sendEmail(new String[]{"matheus.e.sambiase@gmail.com"},registro);
+                            Intent intent = new Intent(RegistroActivity.this, SucessoActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                });
                 /*De onde eu estou e para onde eu vou redirecionar quando clicar no botão */
-                Intent intent = new Intent(RegistroActivity.this, SucessoActivity.class);
-                startActivity(intent);
 
-                ref.setValue(new Registro());
+
 
             }
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -110,6 +98,20 @@ public class RegistroActivity extends Activity {
         spinners.setAdapter(adapter);
 
 
+    }
+
+
+    public void sendEmail(String[] emails, Registro registro){
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.setType("message/rfc822");
+        i.putExtra(Intent.EXTRA_EMAIL  , emails);
+        i.putExtra(Intent.EXTRA_SUBJECT, "Novo Cadastro");
+        i.putExtra(Intent.EXTRA_TEXT   , registro.toString());
+        try {
+            startActivity(Intent.createChooser(i, "Enviar email..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(RegistroActivity.this, "Não existe um cliente de email instaldo.", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 
