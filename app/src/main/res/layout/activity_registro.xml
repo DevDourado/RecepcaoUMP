@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
     android:layout_height="match_parent">
 
 
@@ -9,6 +10,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:hint="Nome do Visitante *"
+        android:textColor="@color/colorText"
         android:ems="10"
         android:layout_marginStart="8dp"
         android:id="@+id/nomeVisitante"
@@ -21,6 +23,7 @@
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:hint="Telefone *"
+        android:textColor="@color/colorText"
         android:ems="10"
         android:layout_marginTop="40dp"
         android:id="@+id/telefone"
@@ -31,6 +34,7 @@
 
     <TextView
         android:text="Idade"
+        android:textColor="@color/colorText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
@@ -44,7 +48,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/idade"
+
         android:layout_alignBottom="@+id/idade"
+        android:textColor="@color/colorText"
         android:layout_marginLeft="10dp"
         android:id="@+id/spinner" />
 
@@ -54,6 +60,7 @@
         android:inputType="textPersonName"
         android:layout_marginTop="40dp"
         android:hint="Observação"
+        android:textColor="@color/colorText"
         android:ems="10"
         android:layout_below="@+id/spinner"
         android:layout_centerHorizontal="true"
@@ -61,9 +68,14 @@
 
     <Button
         android:text="Salvar"
+        android:textColor="@color/colorText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/salvar"
+        android:background="@drawable/border_button"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textSize="20sp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
