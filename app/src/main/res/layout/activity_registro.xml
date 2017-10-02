@@ -9,60 +9,77 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="Nome do Visitante *"
+        android:hint="Nome do Visitante"
         android:textColor="@color/colorText"
         android:ems="10"
         android:layout_marginStart="8dp"
         android:id="@+id/nomeVisitante"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nomeVisitante"
+        android:text="Obrigatório *"
+        android:textSize="12dp"
+        android:layout_marginStart="8dp"
+        />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="phone"
-        android:hint="Telefone *"
+        android:hint="(XX)XXXXX-XXXX"
         android:textColor="@color/colorText"
         android:ems="10"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/telefone"
         android:layout_below="@+id/nomeVisitante"
         android:layout_alignParentStart="true"
-
         />
 
     <TextView
-        android:text="Idade"
-        android:textColor="@color/colorText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_marginTop="40dp"
-        android:id="@+id/idade"
         android:layout_below="@+id/telefone"
-        android:layout_marginLeft="5dp"
-        android:layout_alignParentStart="true" />
+        android:text="Obrigatório *"
+        android:textSize="12dp"
+        android:layout_marginStart="8dp"
+        />
 
-    <Spinner
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/idade"
-
-        android:layout_alignBottom="@+id/idade"
+        android:inputType="textEmailAddress"
+        android:hint="E-mail"
         android:textColor="@color/colorText"
-        android:layout_marginLeft="10dp"
-        android:id="@+id/spinner" />
+        android:ems="10"
+        android:layout_marginStart="2dp"
+        android:id="@+id/email"
+        android:layout_marginTop="50dp"
+        android:layout_below="@+id/telefone"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/email"
+        android:text="Obrigatório *"
+        android:textSize="12dp"
+        android:layout_marginStart="8dp"
+        />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="50dp"
         android:hint="Observação"
         android:textColor="@color/colorText"
         android:ems="10"
-        android:layout_below="@+id/spinner"
+        android:layout_below="@+id/email"
         android:layout_centerHorizontal="true"
         android:id="@+id/observacao" />
 
@@ -74,7 +91,6 @@
         android:id="@+id/salvar"
         android:background="@drawable/border_button"
         android:textAllCaps="false"
-        android:textStyle="bold"
         android:textSize="20sp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"

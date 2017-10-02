@@ -4,7 +4,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label= "Recepcao UMP"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -26,8 +26,15 @@
 
         <meta-data
             android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
+            android:value="@integer/google_play_services_version"
+
+        />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="5a8ec671cec2aab79ba080d368f6e2343e6523ac" />
 
     </application>
 
+    <uses-permission android:name="android.permission.INTERNET" />
 </manifest>

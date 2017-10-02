@@ -1,6 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@color/colorPrimary"
     android:layout_height="match_parent">
 
-</LinearLayout>
+    <Button
+        android:text="Cadastrar Novo"
+        android:layout_width="150dp"
+        android:padding="5dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/border_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="Enviar E-mail"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/button3"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorText"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:textSize="18sp"
+        android:background="@drawable/border_button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/usuario"
+        android:textSize="20sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="210dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:id="@+id/imageSucesso"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/sucesso"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        />
+
+</RelativeLayout>
