@@ -36,17 +36,17 @@ public class RegistroActivity extends Activity {
 
     private Registro registro;
 
-    //* Validação do campo Nome do Visitante - Nome Maior que Zero */
+    //* Função do campo Nome do Visitante - Nome deve ser maior do que dois */
     private boolean isEmptyNome(EditText validacao) {
         String text = validacao.getText().toString().trim();
-        if (text.length() > 0){
+        if (text.length() > 2){
             return true;
         }else
 
             return false;
     }
 
-    //*Validação do campo Telefone*//
+    //*Função do campo Telefone*//
     private boolean isEmptyTelefone(EditText validacao) {
 
         String text = validacao.getText().toString().trim();
@@ -62,19 +62,22 @@ public class RegistroActivity extends Activity {
 
     }
 
-    public boolean validateEmail(String email) {
+    //*Função do campo E-mail*//
+    public boolean isEmptyEmail(String email) {
 
         Pattern pattern;
         Matcher matcher;
+
         String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
         pattern = Pattern.compile(EMAIL_PATTERN);
         matcher = pattern.matcher(email);
+
         return matcher.matches();
 
     }
 
     //*Quando uma activity for chamada, o método "onCreate" é onde seu código irá começar a rodar*//
-
     DatabaseReference ref;
     /**ValueEventListener listener;*/
     String selected;
@@ -108,6 +111,7 @@ public class RegistroActivity extends Activity {
             public void onClick(View v) {
 
 
+
                 /*Validacao do campo: "Nome" colocando a mensagem de validação*/
                 if (!isEmptyNome(nomeVisitante)) {
 
@@ -123,16 +127,13 @@ public class RegistroActivity extends Activity {
                     return;
 
                  /*Validacao do campo: "Email" colocando a mensagem de validação*/
-                } else
+                } else if (!isEmptyEmail(email.getText().toString())){
 
-                    if (!validateEmail(email.toString())){
+                    email.setError("Necessário preencher o E-mail!");
 
-                        email.setError("Necessário preencher o E-mail!");
+                    return;
 
-                        return;
-
-                    }
-
+                }
 
 
                 /*Quando você vai pegar um Texto de um EditText, quando vc usa o método "getText()"

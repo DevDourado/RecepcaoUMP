@@ -40,7 +40,7 @@ public class SucessoActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                sendEmail(new String[]{"mocidade@ippinheiros.org"}, registro);
+                sendEmail(new String[]{registro.getEmail()}, registro);
             }
         });
 
@@ -61,7 +61,7 @@ public class SucessoActivity extends Activity {
     /** Método que envia os dados salvos para o e-mail */
     public void sendEmail(String[] emails, Registro registro){
 
-        String conteudo = "Um novo visitante foi recepcionado pela equipe de recepção da UMP:"
+        String conteudo = "Um novo visitante foi recepcionado pela equipe de recepção da UMP."
 
                 +System.lineSeparator()+
                 System.lineSeparator()+
@@ -84,5 +84,4 @@ public class SucessoActivity extends Activity {
             Toast.makeText(SucessoActivity.this, "Não existe um cliente de email instaldo.", Toast.LENGTH_SHORT).show();
         }
     }
-
 }
