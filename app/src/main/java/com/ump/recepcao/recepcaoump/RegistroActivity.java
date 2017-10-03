@@ -5,8 +5,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +24,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.ump.recepcao.recepcaoump.model.Registro;
 import com.ump.recepcao.recepcaoump.util.Mask;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Felipe Dourado on 22/03/2017.
@@ -40,16 +46,6 @@ public class RegistroActivity extends Activity {
             return false;
     }
 
-//    //*Validação 2 do campo Nome do Visitante -  *//
-//    private boolean isEmptyNome2(EditText validacao2) {
-//        String text = validacao2.getText().toString().trim();
-//        if (text.length() < 5){
-//            return true;
-//        }else
-//
-//            return false;
-//    }
-
     //*Validação do campo Telefone*//
     private boolean isEmptyTelefone(EditText validacao) {
 
@@ -66,19 +62,14 @@ public class RegistroActivity extends Activity {
 
     }
 
-    //*Validação do campo Email*//
-    private boolean isEmptyEmail(EditText validacao) {
+    public boolean validateEmail(String email) {
 
-        String text = validacao.getText().toString().trim();
-
-        if ((text.length() > 0)) {
-            return true;
-
-        } else {
-
-            return false;
-
-        }
+        Pattern pattern;
+        Matcher matcher;
+        String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        pattern = Pattern.compile(EMAIL_PATTERN);
+        matcher = pattern.matcher(email);
+        return matcher.matches();
 
     }
 
@@ -104,10 +95,7 @@ public class RegistroActivity extends Activity {
         /*Campos - Devem ser criados nas activity para pegar o id*/
         final EditText nomeVisitante = (android.widget.EditText) findViewById(R.id.nomeVisitante);
         final EditText telefone = (android.widget.EditText) findViewById(R.id.telefone);
-        final EditText email = (android.widget.EditText) findViewById(R.id.email);
-
-        /*final Spinner spinner = (android.widget.Spinner) findViewById(R.id.spinner);*/
-
+        final EditText email = (EditText) findViewById(R.id.email);
         final EditText observacao = (android.widget.EditText) findViewById(R.id.observacao);
         final Button salvar = (android.widget.Button) findViewById(R.id.salvar);
 
@@ -127,12 +115,6 @@ public class RegistroActivity extends Activity {
 
                     return;
 
-//                }else if(!isEmptyNome2(nomeVisitante)){
-//
-//                        nomeVisitante.setError("TESTE 2 < 10");
-//
-//                        return;
-
                 /*Validacao do campo: "Telefone" colocando a mensagem de validação*/
                 } else if (!isEmptyTelefone(telefone)) {
 
@@ -141,26 +123,28 @@ public class RegistroActivity extends Activity {
                     return;
 
                  /*Validacao do campo: "Email" colocando a mensagem de validação*/
-                } else if (!isEmptyEmail(email)) {
+                } else
 
-                    email.setError("Necessário preencher o E-mail!");
+                    if (!validateEmail(email.toString())){
 
-                    return;
-                }
+                        email.setError("Necessário preencher o E-mail!");
+
+                        return;
+
+                    }
+
+
 
                 /*Quando você vai pegar um Texto de um EditText, quando vc usa o método "getText()"
-                você não pega a String direto, vc usa um toString() para transformar o objeto que volta no getText() para uma String*/
+                você não pega a String direto, vc usa um toString() para transformar o objeto que volta no getText()
+                para uma String*/
                 String nome = nomeVisitante.getText().toString();
                 String tel = telefone.getText().toString();
-                String emai = email.getText().toString();
+                String ema = email.getText().toString();
                 String obs = observacao.getText().toString();
 
                 /*Instanciando Objeto Registro.*/
-                registro = new Registro(nome, tel, emai, obs);
-
-                /*
-                Idade que será incluida no objeto registro acima.
-                Integer.parseInt(selected)*/
+                registro = new Registro(nome, tel, ema, obs);
 
                 /*Confirmação da ação do botão "SALVAR"*/
                 AlertDialog.Builder builder = new AlertDialog.Builder(RegistroActivity.this);
@@ -184,34 +168,6 @@ public class RegistroActivity extends Activity {
         });
 
     }
-
-        /* Spinner para criar as idades
-        Spinner spinners;
-        String[] arraySpinner = new String[21];
-
-        spinners = (Spinner) findViewById(R.id.spinner);
-
-        int y = 0;
-        for (int i = 18; i <= 38; i++) {
-            arraySpinner[y] = String.valueOf(i);
-            y++;
-        }
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_item, arraySpinner);
-        spinners.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selected = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        */
 
     /*Bloco de código que salva dados no Firebase, foi adicionado dois callbacks, um olhando o sucesso da transação e outro a falha*/
     public void saveRegistro(){

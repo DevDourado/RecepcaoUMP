@@ -13,9 +13,6 @@ public class Registro implements Serializable {
     private String nomeVisitante;
     private String telefone;
     private String email;
-
-    /*private int idade;*/
-
     private String observacao;
 
     public Registro() {
@@ -27,7 +24,6 @@ public class Registro implements Serializable {
         this.nomeVisitante = nomeVisitante;
         this.telefone = telefone;
         this.email = email;
-        /*this.idade = idade;*/
         this.observacao = observacao;
     }
 
@@ -71,11 +67,9 @@ public class Registro implements Serializable {
     public String toString() {
 
         String texto = "Nome: "+nomeVisitante+ System.lineSeparator()+
-                "Telefone: "+telefone+System.lineSeparator()+
-                "Email: "+email+System.lineSeparator()+
-                /*"Idadae: "+idade+System.lineSeparator()+*/
-                "Observação: "+observacao+System.lineSeparator();
+                       "Telefone: "+telefone+System.lineSeparator()+
+                       "Email: "+email+System.lineSeparator()+
+                       "Observação: "+observacao+System.lineSeparator();
         return texto;
-
     }
 }
